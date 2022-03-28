@@ -25,4 +25,5 @@ func main() {
 	}
 	fmt.Println("Update Info:", updateInfo)
 	fmt.Println("AppImage Type:", myAppImage.Type())
+	fmt.Println("Should Be Integrated?", myAppImage.ShallBeIntegrated())
 }

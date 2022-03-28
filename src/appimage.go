@@ -47,6 +47,7 @@ type AppImage struct {
   //(ai AppImage) Thumbnail() (io.ReadCloser, error)
   //(ai AppImage) Icon() (io.ReadCloser, string, error)
   //(ai AppImage) GetUpdateInformation() (string, error)
+  //(ai AppImage) ShallBeIntegrated() (bool)
   //(ai AppImage) ModTime() time.Time
 }
 
@@ -128,6 +129,23 @@ func NewAppImage(path string) (*AppImage, error) {
 //Type is the type of the AppImage. Should be either 1 or 2.
 func (ai AppImage) Type() int {
 	return ai.imageType
+}
+
+func (ai AppImage) ShallBeIntegrated() bool {
+	var integrationRequested string = "true"
+	var NoDisplay string = "false"
+
+	if ai.Desktop.Section("Desktop Entry").HasKey("X-AppImage-Integrate") {
+		integrationRequested = ai.Desktop.Section("Desktop Entry").Key("X-AppImage-Integrate").Value()
+	} else if ai.Desktop.Section("Desktop Entry").HasKey("NoDisplay") {
+		NoDisplay = ai.Desktop.Section("Desktop Entry").Key("NoDisplay").Value()
+	}
+
+	if integrationRequested == "false" || NoDisplay == "true" {
+		return false
+	} else {
+		return true
+	}
 }
 
 //ExtractFile extracts a file from from filepath (which may contain * wildcards) in an AppImage to the destinationdirpath.

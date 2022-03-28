@@ -72,6 +72,13 @@ Gets the update information string from the AppImage
 updateInformation, err := ai.GetUpdateInformation()
 ```
 
+#### `(ai AppImage) ShallBeIntegrated() bool`
+Returns a boolean representing if that AppImage should be integrated or not.
+
+```go
+shouldBeIntegrated := ai.ShallBeIntegrated()
+```
+
 #### `(ai AppImage) ModTime() time.Time`
 Returns last time the AppImage was modified, it will try to get the information from squashfs if fails then returns the last time the AppImage file was modified.
 
