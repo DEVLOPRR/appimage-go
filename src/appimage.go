@@ -26,15 +26,18 @@ TODO List:
 
 // AppImage handles AppImage files.
 type AppImage struct {
-	reader archiveReader
-	Desktop           *ini.File // Desktop is the AppImage's main .desktop file parsed as an ini.File.
-	Path              string
-	UpdateInformation string
+	// Public
+	Desktop           *ini.File // Desktop is the AppImage's main .desktop file parsed as an ini.File
 	Name              string
 	Description       string
 	Version           string
 	Categories        []string
 	MimeType	      []string
+	Path              string
+	UpdateInformation string
+
+	// Private
+	reader archiveReader
 	offset            int64
 	imageType         int
   // Functions Available In This Struct
@@ -129,7 +132,7 @@ func (ai AppImage) Type() int {
 
 //ExtractFile extracts a file from from filepath (which may contain * wildcards) in an AppImage to the destinationdirpath.
 //
-//If resolveSymlinks is true, if the filepath specified is a symlink, the actual file is extracted in it's place.
+//If resolveSymlinks is true & if the filepath specified is a symlink, then the actual file is extracted in it's place.
 //resolveSymlinks will have no effect on absolute symlinks (symlinks that start at root).
 func (ai AppImage) ExtractFile(filepath string, destinationdirpath string, resolveSymlinks bool) error {
 	return ai.reader.ExtractTo(filepath, destinationdirpath, resolveSymlinks)

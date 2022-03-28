@@ -14,7 +14,6 @@ func main() {
 		return;
 	}
 
-	// myAppImage.Description
 	fmt.Println("Name:", myAppImage.Name)
 	fmt.Println("Description:", myAppImage.Description)
 	fmt.Println("Version:", myAppImage.Version)
