@@ -1,5 +1,5 @@
 # AppImage Go
-AppImage Manipulation From Go. (Fork of [GoAppImage](https://github.com/probonopd/go-appimage/tree/master/src/goappimage))
+AppImage Manipulation/Interaction From Go. (Fork of [GoAppImage](https://github.com/probonopd/go-appimage/tree/master/src/goappimage))
 
 ---
 ## API
